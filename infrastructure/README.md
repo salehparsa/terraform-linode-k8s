@@ -1,4 +1,4 @@
-### Terraform
+## Terraform
 
 [Linode](https://www.linode.com/products/kubernetes/) provides a fast and simple Kubernetes cluster deployments and they even recently started to update their terraform provider to support provisioning via [terraform](https://registry.terraform.io/providers/linode/linode/latest/docs/resources/lke_cluster)
 
@@ -30,6 +30,57 @@ terraform plan -var-file="secret.tfvars"
 
 ```
 terraform apply -var-file="secret.tfvars"
+```
+# Example of Terraform Plan
+
+```
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # linode_lke_cluster.assignment-cluster will be created
+  + resource "linode_lke_cluster" "assignment-cluster" {
+      + api_endpoints = (known after apply)
+      + id            = (known after apply)
+      + k8s_version   = "1.18"
+      + kubeconfig    = (sensitive value)
+      + label         = "home_assignment"
+      + region        = "eu-west"
+      + status        = (known after apply)
+      + tags          = [
+          + "home_assignment",
+        ]
+
+      + pool {
+          + count = 1
+          + id    = (known after apply)
+          + nodes = (known after apply)
+          + type  = "g6-standard-1"
+        }
+      + pool {
+          + count = 1
+          + id    = (known after apply)
+          + nodes = (known after apply)
+          + type  = "g6-standard-1"
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
 ```
 
 ## Add K8s Config into your machine:
