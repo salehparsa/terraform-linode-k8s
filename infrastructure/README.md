@@ -31,7 +31,7 @@ terraform plan -var-file="secret.tfvars"
 ```
 terraform apply -var-file="secret.tfvars"
 ```
-# Example of Terraform Plan
+### Example of Terraform Plan
 
 ```
 Refreshing Terraform state in-memory prior to plan...
