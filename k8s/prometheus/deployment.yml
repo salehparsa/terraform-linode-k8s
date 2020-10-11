@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      volumes:
+        - name: prometheus-config-map
+          configMap:
+            name: prometheus-config
+      containers:
+      - name: prometheus
+        image: prom/prometheus
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+          - name: prometheus-config-map
+            mountPath: /etc/prometheus/prometheus.yml
+            subPath: prometheus.yml

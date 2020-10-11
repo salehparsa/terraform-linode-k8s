@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom-http-simulator
+  namespace:  app
+spec:
+  selector:
+    matchLabels:
+      app: prom-http-simulator
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: prom-http-simulator
+    spec:
+      containers:
+      - name: prom-http-simulator
+        image: pierrevincent/prom-http-simulator
+        ports:
+        - containerPort: 8080
