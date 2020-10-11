@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prom-http-simulator-service
+  namespace: app
+spec:
+  selector:
+    app: prom-http-simulator
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
