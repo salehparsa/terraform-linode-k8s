@@ -15,3 +15,5 @@ spec:
       containers:
       - name: prom-http-simulator
         image: pierrevincent/prom-http-simulator
+        ports:
+        - containerPort: 8080
