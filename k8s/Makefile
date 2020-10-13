@@ -30,7 +30,7 @@ all:
 	@echo "Usage: [ENV=dev|prod] make <get|describe|logs|apply>"
 
 get: check-env
-	kubectl  --namespace $(NAMESPACE) get pod -lapp=$(DEP)
+	kubectl  --namespace $(NAMESPACE) get pod
 
 describe: check-env
 	kubectl --namespace $(NAMESPACE) describe deployment $(DEP)
@@ -42,7 +42,7 @@ apply dry-run template: check-env
 	@ \
 	DRY_RUN_FLAG=$$( [ "$@" = "dry-run" ]  && echo -n '--server-dry-run' || true); \
 	TEMPLATE_ONLY=$$([ "$@" = "template" ] && echo -n 'y'                || true); \
-	apply () { [ -n "$$TEMPLATE_ONLY" ] && cat || kubectl --context $(CONTEXT) --namespace $(NAMESPACE) apply $$DRY_RUN_FLAG -f -; }; \
+	apply () { [ -n "$$TEMPLATE_ONLY" ] && cat || kubectl --namespace $(NAMESPACE) apply $$DRY_RUN_FLAG -f -; }; \
 	for FILENAME in $(TARGET_FILES); do \
 		echo -e "\e[1;44m""### Applying file: $$FILENAME""\e[0m"; \
 		envsubst '$(TEMPLATE_VARS)' <$$FILENAME | apply; \
