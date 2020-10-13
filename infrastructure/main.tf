@@ -1,6 +1,7 @@
 /**
 Since provider has moved to linode/linode for users on Terraform 0.13 or greater,
-I have used linode/linode instead of hashicorp/linode in required_providers.
+to make it compatible with terraform 0.13 or greater,linode/linode is used for source 
+instead of hashicorp/linode in required_providers.
 **/
 terraform {
   required_version = "0.12.21"  
