@@ -38,8 +38,6 @@ spec:
             memory: "1Gi"
         volumeMounts:
           - name: prometheus-config-map
-            mountPath: /etc/prometheus/prometheus.yml
-            subPath: prometheus.yml
+            mountPath: /etc/prometheus
           - name: prometheus-rules
             mountPath: /etc/prometheus-rules
-            subPath: health-check.yml
