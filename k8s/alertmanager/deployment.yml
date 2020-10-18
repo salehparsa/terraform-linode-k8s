@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager
+  namespace: monitoring
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: alertmanager
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+  template:
+    metadata:
+      name: alertmanager
+      labels:
+        app: alertmanager
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9093"
+    spec:
+      containers:
+      - name: alertmanager
+        image: prom/alertmanager
+        args:
+          - '--config.file=/etc/alertmanager/config.yml'
+          - '--storage.path=/alertmanager'
+        volumeMounts:
+        - name: config
+          mountPath: /etc/alertmanager
+        ports:
+        - name: web
+          containerPort: 9093
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: alertmanager
+        resources:
+          limits:
+            memory: 512Mi
+      volumes:
+      - name: config
+        configMap:
+          name: alertmanager-config
