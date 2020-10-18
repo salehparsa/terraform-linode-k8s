@@ -121,3 +121,6 @@ Events:
   Normal  ScalingReplicaSet  30m   deployment-controller  Scaled down replica set alertmanager-675589c796 to 0
   Normal  ScalingReplicaSet  30m   deployment-controller  Scaled up replica set alertmanager-6cc66ccd9b to 1
 ```
+
+## To Do
+- [ ] Securing Prometheus by adding authentication as mentioned [here](https://prometheus.io/docs/guides/basic-auth/)
