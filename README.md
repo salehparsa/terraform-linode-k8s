@@ -33,10 +33,10 @@ Example:
 Setting Error Rate to 50%:
 
 ```
-curl -H 'Content-Type: application/json' -X PUT -d '{"error_rate": 50}' http://185.3.92.240:8080/error_rate
+curl -H 'Content-Type: application/json' -X PUT -d '{"error_rate": 50}' http://212.71.236.119:8080/error_rate
 ```
 
-In Above example, my IP Address is `185.3.92.240`.
+In Above example, my IP Address is `212.71.236.119`.
 
 Apart from the application it self, you can have access to `prometheus` from your brwoser by going to `http://IP:9090`. In my example, `prometheus` is accessible via `http://185.3.92.242:9090/`
 
