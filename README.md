@@ -24,6 +24,21 @@ If you want to use `Makefile`of this project, please run `brew install gettext`i
 ## How To Use
 In order to use this repository, you need to deploy the `infrastructure` first. That way you will have your cluster on Linode. After that, you can deploy the application and prometheus from `k8s` directory. Each directory has the Readme file that contains required information.
 
+### How To Access
+
+When you deploy the application, it is available in Port 8080. Thus, as mentioned in [`prom-http-simulator` documentation] (https://hub.docker.com/r/pierrevincent/prom-http-simulator), you can start running the `curl` command turn on spike and off or even sending random load to the service.
+
+Example:
+
+Setting Error Rate to 50%:
+
+```
+curl -H 'Content-Type: application/json' -X PUT -d '{"error_rate": 50}' http://185.3.92.240:8080/error_rate
+```
+
+In Above example, my IP Address is `185.3.92.240`.
+
+Apart from the application it self, you can have access to `prometheus` from your brwoser by going to `http://IP:9090`. In my example, `prometheus` is accessible via `http://185.3.92.242:9090/`
 
 ## Known Issue
 At the time of writing this Readme I haven't found any issues. However, since it stays opensource I would like to see your feedback as an issue on this repository and even feel free to raise a pull request.
