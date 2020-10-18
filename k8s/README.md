@@ -1,6 +1,6 @@
 ## Kubernetes manifests files
 
-We have three different directories here. `app`  directory contains the manifest files of the application and `prometheus` contains the manifest files of the the monitoring. `k8sconfig` contains the manifest files of the the namespace configuration and cluster roles required for prometheus.
+We have different directories here. `app`  directory contains the manifest files of the application and `prometheus` contains the manifest files of the the monitoring. `k8sconfig` contains the manifest files of the the namespace configuration and cluster roles required for prometheus.  `grafana` directory contains the manifest files of the application
 
 ## Deployment
 
