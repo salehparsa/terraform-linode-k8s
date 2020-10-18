@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: prometheus-config
+  name: prometheus-config-map
   namespace: monitoring
 data:
   prometheus.yml: |-
@@ -70,7 +70,7 @@ metadata:
   name: prometheus-rules
   namespace: monitoring
 data:
-  http-simulator.yaml: |-
+  health-check.yml: |-
     groups:
     - name: http_simulator_health
       rules:

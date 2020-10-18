@@ -12,17 +12,34 @@ spec:
     metadata:
       labels:
         app: prometheus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
     spec:
+      serviceAccountName: prometheus
       volumes:
         - name: prometheus-config-map
           configMap:
             name: prometheus-config
+        - name: prometheus-rules
+          configMap:
+             name: prometheus-rules
       containers:
       - name: prometheus
         image: prom/prometheus
+        args:
+          - '--storage.tsdb.retention=7d'
+          - '--web.enable-lifecycle'
+          - '--config.file=/etc/prometheus/prometheus.yml'
         ports:
         - containerPort: 9090
+        resources:
+          limits:
+            memory: "1Gi"
         volumeMounts:
           - name: prometheus-config-map
             mountPath: /etc/prometheus/prometheus.yml
             subPath: prometheus.yml
+          - name: prometheus-rules
+            mountPath: /etc/prometheus-rules
+            subPath: health-check.yml
