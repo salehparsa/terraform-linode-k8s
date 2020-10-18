@@ -13,6 +13,7 @@ It also contains manfiest to deploy [`prom-http-simulator`](https://hub.docker.c
     - `prometheus` : Manifest file for deploying `prometheus`
     - `alertmanager` : Manifest file for deploying `alertmanager`
     - `k8sconfig` : Manifest file for configuring `namespace` and `ClusterRole`
+    - `grafana` : Manifest file for configuring `grafana`
 ## Getting Started
 Please make sure that you have already `kubectl` and `git` installed.
 
@@ -40,6 +41,8 @@ In Above example, my IP Address is `212.71.236.119`.
 
 Apart from the application it self, you can have access to `prometheus` from your brwoser by going to `http://IP:9090`. In my example, `prometheus` is accessible via `http://185.3.92.242:9090/`
 
+This project has Grafana which is configured to use `prometheus` for visualising metrics. It is accessible on `http://IP:3000`. In my deployment it is accessible via `http://178.79.175.105:3000/` 
+
 ### Query Prometheus
 
 We can query the number of requests that this service has received by running following query:
@@ -53,6 +56,29 @@ Application expose multiple metrics with suffix of `_buckets` and one of them is
 ```
 http_request_duration_milliseconds_bucket{app="prom-http-simulator"}
 ```
+
+## Further information and disscussion
+
+The main application is [`prom-http-simulator`](https://hub.docker.com/r/pierrevincent/prom-http-simulator/) and it gives and ability to generate random spike on demand by curl the endpoints. That's why I haven't ran the specific load test against it since it generates the spike for testing propose. 
+
+However, it is possible to run different stage of testing via [`Artillery`](https://artillery.io/) to test specific or different endpoints of an application.
+
+As mentioned in previous section, since the application is using HTTP request, we can monitor the request via `http_requests_total` or see the total by queries. We can also use `sum` or `rate` function in `prometheus` as well.
+
+Example:
+
+Aggregate total number of successful requests:
+
+```
+sum(http_requests_total{app="prom-http-simulator", status="200"})
+```
+
+Number of requests per second:
+
+```
+sum(rate(http_requests_total{app="http-simulator", status="200"}[30m]))
+```
+
 
 ## Known Issue
 At the time of writing this Readme I haven't found any issues. However, since it stays opensource I would like to see your feedback as an issue on this repository and even feel free to raise a pull request.
