@@ -40,6 +40,20 @@ In Above example, my IP Address is `212.71.236.119`.
 
 Apart from the application it self, you can have access to `prometheus` from your brwoser by going to `http://IP:9090`. In my example, `prometheus` is accessible via `http://185.3.92.242:9090/`
 
+### Query Prometheus
+
+We can query the number of requests that this service has received by running following query:
+
+```
+http_requests_total{app="prom-http-simulator"}
+```
+
+Application expose multiple metrics with suffix of `_buckets` and one of them is `http_request_duration_milliseconds` which is good for checking Latency:
+
+```
+http_request_duration_milliseconds_bucket{app="prom-http-simulator"}
+```
+
 ## Known Issue
 At the time of writing this Readme I haven't found any issues. However, since it stays opensource I would like to see your feedback as an issue on this repository and even feel free to raise a pull request.
 
