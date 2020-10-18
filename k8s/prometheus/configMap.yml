@@ -75,12 +75,12 @@ data:
     - name: http_simulator_health
       rules:
       - alert: HttpSimulatorNotRunning
-        expr: absent(up{app="http-simulator"}) == 1
+        expr: absent(up{app="prom-http-simulator"}) == 1
         for: 1m
         labels:
           severity: major
       - alert: HttpSimulatorDown
-        expr: sum(up{app="http-simulator"}) == 0
+        expr: sum(up{app="prom-http-simulator"}) == 0
         for: 1m
         labels:
           severity: major
